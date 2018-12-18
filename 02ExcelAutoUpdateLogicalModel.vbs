@@ -1,4 +1,4 @@
-'¿ªÊ¼
+'å¼€å§‹
 Option Explicit
 
 Dim mdl ' the current model
@@ -24,18 +24,18 @@ If RQ = vbYes Then
       ExcelPath = left(ExcelPath, instr(ExcelPath,"[")-1)
    end if
    Set x1 = CreateObject("Excel.Application")
-   Set excel = x1.Workbooks.Open(ExcelPath) 'Ö¸¶¨ excelÎÄµµÂ·¾¶
+   Set excel = x1.Workbooks.Open(ExcelPath) 'æŒ‡å®š excelæ–‡æ¡£è·¯å¾„
    for j=1 to excel.Worksheets.Count
       Set oSheet = excel.Sheets(j)
       oSheet.Activate
       'doCheckSheet x1, mdl
       newTable x1, mdl
-      'x1.Workbooks(1).Worksheets("d_site").Activate 'Ö¸¶¨Òª´ò¿ªµÄsheetÃû³Æ
+      'x1.Workbooks(1).Worksheets("d_site").Activate 'æŒ‡å®šè¦æ‰“å¼€çš„sheetåç§°
       'if j =3 then
       '   exit for
       'end if
    Next
-   MsgBox "Éú³ÉÊı¾İ ±í½á¹¹¹²¼Æ " + CStr(count), vbOK + vbInformation, " ±í"
+   MsgBox "ç”Ÿæˆæ•°æ® è¡¨ç»“æ„å…±è®¡ " + CStr(count), vbOK + vbInformation, " è¡¨"
 Else
    HaveExcel = False
 End If
@@ -44,7 +44,7 @@ End If
 'a x1, mdl
 sub doCheckSheet(x1, mdl)
    'MsgBox oSheet.name
-   if oSheet.name = "°æ±¾¸üĞÂ¼ÇÂ¼" Or oSheet.name = "»ã×Ü" Then
+   if oSheet.name = "ç‰ˆæœ¬æ›´æ–°è®°å½•" Or oSheet.name = "æ±‡æ€»" Then
       Exit Sub
    End If
    
@@ -76,7 +76,7 @@ function getCol(cname,table)
          exit function
       end if
    next
-   set getCol = table.Attributes.CreateNew '´´½¨Ò»ÁĞ/×Ö¶Î
+   set getCol = table.Attributes.CreateNew 'åˆ›å»ºä¸€åˆ—/å­—æ®µ
 end function
 
 sub newTable(x1, mdl)
@@ -89,7 +89,7 @@ sub newTable(x1, mdl)
    dim suffix
    
    'on error Resume Next
-   if oSheet.name = "°æ±¾¸üĞÂ¼ÇÂ¼" Or oSheet.name = "»ã×Ü" Then
+   if oSheet.name = "ç‰ˆæœ¬æ›´æ–°è®°å½•" Or oSheet.name = "æ±‡æ€»" Then
       'MsgBox oSheet.name
       Exit Sub
    End If
@@ -99,11 +99,11 @@ sub newTable(x1, mdl)
    'wend
    
    set table = getTable(tableName)
-   'set table = mdl.Tables.CreateNew '´´½¨Ò»¸ö ±íÊµÌå
-   table.Name = tableName 'Ö¸¶¨ ±íÃû£¬Èç¹ûÔÚ ExcelÎÄµµÀïÓĞ£¬Ò²¿ÉÒÔ .Cells(rwIndex, 3).Value ÕâÑùÖ¸¶¨
-   table.Code = tableName 'Ö¸¶¨ ±íÃû
+   'set table = mdl.Tables.CreateNew 'åˆ›å»ºä¸€ä¸ª è¡¨å®ä½“
+   table.Name = tableName 'æŒ‡å®š è¡¨åï¼Œå¦‚æœåœ¨ Excelæ–‡æ¡£é‡Œæœ‰ï¼Œä¹Ÿå¯ä»¥ .Cells(rwIndex, 3).Value è¿™æ ·æŒ‡å®š
+   table.Code = tableName 'æŒ‡å®š è¡¨å
    count = count + 1
-   For rwIndex = 3 To 1000 'Ö¸¶¨Òª±éÀúµÄ ExcelĞĞ±ê ÓÉÓÚµÚ1ĞĞÊÇ ±íÍ·£¬ ´ÓµÚ2ĞĞ¿ªÊ¼
+   For rwIndex = 3 To 1000 'æŒ‡å®šè¦éå†çš„ Excelè¡Œæ ‡ ç”±äºç¬¬1è¡Œæ˜¯ è¡¨å¤´ï¼Œ ä»ç¬¬2è¡Œå¼€å§‹
       'th x1.Workbooks(1).Worksheets("d_site")
       'MsgBox oSheet.Cells(rwIndex, 1).Value
       If oSheet.Cells(rwIndex, 1).Value = "" Then
@@ -111,14 +111,14 @@ sub newTable(x1, mdl)
       End If
 
       'set col = getCol(oSheet.Cells(rwIndex, 2).Value,table)
-      set col = table.Attributes.CreateNew '´´½¨Ò»ÁĞ/×Ö¶Î
+      set col = table.Attributes.CreateNew 'åˆ›å»ºä¸€åˆ—/å­—æ®µ
       col.Name = oSheet.Cells(rwIndex, 2).Value
-      'MsgBox col.Name, vbOK + vbInformation, "ÁĞ"
-      col.Code = oSheet.Cells(rwIndex, 2).Value 'Ö¸¶¨ÁĞÃû
-      col.DataType = oSheet.Cells(rwIndex, 4).Value 'Ö¸¶¨ÁĞÊı¾İÀàĞÍ
-      col.Comment = oSheet.Cells(rwIndex, 3).Value 'Ö¸¶¨ÁĞËµÃ÷
+      'MsgBox col.Name, vbOK + vbInformation, "åˆ—"
+      col.Code = oSheet.Cells(rwIndex, 2).Value 'æŒ‡å®šåˆ—å
+      col.DataType = oSheet.Cells(rwIndex, 4).Value 'æŒ‡å®šåˆ—æ•°æ®ç±»å‹
+      col.Comment = oSheet.Cells(rwIndex, 3).Value 'æŒ‡å®šåˆ—è¯´æ˜
       If oSheet.Cells(rwIndex, 5).Value = "PK" Then
-         col.PrimaryIdentifier = true 'Ö¸¶¨Ö÷¼ü
+         col.PrimaryIdentifier = true 'æŒ‡å®šä¸»é”®
       End If
       'End With
    Next
